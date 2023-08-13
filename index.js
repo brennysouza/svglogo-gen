@@ -1,6 +1,9 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const logo = require('./logo.svg');
+// This code below imports the parent and child classes of the shapes allowing them to be used here in this file. 
+const { Shapes, Triangle, Circle, Square } = require('./lib/shapes');
+
 
 
 const prompt = [
