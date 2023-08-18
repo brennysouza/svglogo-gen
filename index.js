@@ -32,8 +32,10 @@ const prompt = [
 
 function generateSvgLogo(shape, shapeColor, monogram, monogramColor) {
     const logo = new shape();
-    
+
     logo.setColor(shapeColor);
+
+    const shapeSvg = logo.render();
 
     const monogramSvg = `<text x="20" y="40" font-size="30" fill="${monogramColor}">${monogram}</text>`;
 
@@ -45,23 +47,29 @@ function generateSvgLogo(shape, shapeColor, monogram, monogramColor) {
   `;
 }
 
-
-
 function init() {
-    inquirer.prompt(prompt).then((responses, data) => { 
-        const logoContent = logo.generateLogo({
-            Title: responses.Title,
-            Description: responses.Description,
-            Installation: responses.Installation,
-            Usage: responses.Usage,
-            License: responses.License,
-            Contribution: responses.Contribution,
-            Tests: responses.Tests,
-            GitHub: responses.GitHub.replace(/\s+/g, '-'),
-            Email: responses.Email,
-        });
+    inquirer.prompt(prompt).then((responses) => { 
+        const { Shape, 'Shape Color': shapeColor, Monogram, 'Monogram Color': monogramColor } = responses; {
+            let shape;
+            switch (Shape) {
+                case 'Circle':
+                    shape = Circle;
+                    break;
+                case 'Square':
+                    shape = Square;
+                    break;
+                case 'Triangle':
+                    shape = Triangle;
+                    break;
+            }
 
-        writeToFile('logo.svg', logoContent);
+        const logoSvgContent = generateSvgLogo(shape, shapeColor, Monogram, monogramColor);
+        fs.writeFileSync('logo.svg', logoSvgContent);
+        console.log('Generated logo.svg');
+
+        }
+
+        // writeToFile('logo.svg', logoContent);
     });
 }
 
