@@ -2,7 +2,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const logo = require('./logo.svg');
 // This code below imports the parent and child classes of the shapes allowing them to be used here in this file. 
-const { Shapes, Triangle, Circle, Square } = require('./lib/shapes');
+const { Triangle, Circle, Square } = require('./lib/shapes');
 
 
 
@@ -30,8 +30,25 @@ const prompt = [
     },
 ];
 
+function generateSvgLogo(shape, shapeColor, monogram, monogramColor) {
+    const logo = new shape();
+    
+    logo.setColor(shapeColor);
+
+    const monogramSvg = `<text x="20" y="40" font-size="30" fill="${monogramColor}">${monogram}</text>`;
+
+    return `
+    <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+      ${monogramSvg}
+      ${shapeSvg}
+    </svg>
+  `;
+}
+
+
+
 function init() {
-    inquirer.prompt(questions).then((responses, data) => { 
+    inquirer.prompt(prompt).then((responses, data) => { 
         const logoContent = logo.generateLogo({
             Title: responses.Title,
             Description: responses.Description,
