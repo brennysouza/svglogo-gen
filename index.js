@@ -39,7 +39,7 @@ function generateSvgLogo(shapeClass, shapeColor, monogram, monogramColor) {
 
     switch (shapeClass.name) {
         case 'Circle':
-            textX = 100; // Center of the SVG
+            textX = 150; // Center of the SVG
             textY = 100; // Center of the SVG
             break;
         case 'Square':
