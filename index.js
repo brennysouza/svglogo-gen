@@ -37,27 +37,29 @@ function generateSvgLogo(shapeClass, shapeColor, monogram, monogramColor) {
     // Thise code is for the position and font size of the text based on the shape
     let textX, textY, fontSize;
 
-        switch (shapeClass.name) {
-            case 'Circle':
-                textX = 100; 
-                textY = 100; 
-                fontSize = 50;
-                break;
-            case 'Square':
-                textX = 150; 
-                textY = 150; 
-                fontSize = 50;
-                break;
-            case 'Triangle':
-                textX = 150; 
-                textY = 110; 
-                fontSize = 50;
-                break;
-        }
+    switch (shapeClass.name) {
+        case 'Circle':
+            textX = 100; // Center of the SVG
+            textY = 100; // Center of the SVG
+            break;
+        case 'Square':
+            textX = 150; // Center of the SVG
+            textY = 130; // Center of the SVG
+            break;
+        case 'Triangle':
+            textX = 145; // Center of the SVG
+            textY = 140; // Center of the SVG
+            break;
+        // default:
+        //     textX = 100; // Default to center of the SVG
+        //     textY = 100; // Default to center of the SVG
+    }
+
+    fontSize = 30;
 
     // console.log(`Debug - textX: ${textX}, textY: ${textY}, fontSize: ${fontSize}`);
 
-    const monogramSvg = `<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="40" fill="${monogramColor}">${monogram}</text>`;
+    const monogramSvg = `<text x="${textX}" y="${textY}" dominant-baseline="middle" text-anchor="middle" font-size="${fontSize}" fill="${monogramColor}">${monogram}</text>`;
 
 
     return `
@@ -86,7 +88,7 @@ async function init() {
     try {
         const responses = await inquirer.prompt(prompt);
 
-        const { shape, shapeColor, Monogram, monogramColor } = responses; 
+        const { shape, shapeColor, monogram, monogramColor } = responses; 
         
         let shapeClass;
             switch (shape) {
@@ -101,7 +103,7 @@ async function init() {
                     break;
             }
 
-        const logoSvgContent = generateSvgLogo(shapeClass, shapeColor, Monogram, monogramColor);
+        const logoSvgContent = generateSvgLogo(shapeClass, shapeColor, monogram, monogramColor);
         fs.writeFileSync('logo.svg', logoSvgContent);
         console.log('Generated logo.svg');
 
