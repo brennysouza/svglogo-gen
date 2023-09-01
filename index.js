@@ -50,8 +50,8 @@ async function init() {
             }
 
         const logoSvgContent = generateSvgLogo(shapeClass, shapeColor, monogram, monogramColor);
-        const timestamp = Date.now();
-        const filePath = `examples/logo_${timestamp}.svg`;
+        const timeStamp = Date.now();
+        const filePath = `examples/logo_${timeStamp}.svg`;
         fs.writeFileSync(filePath, logoSvgContent);
         console.log(`Generated logo.svg`);
 
