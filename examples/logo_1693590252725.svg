@@ -1,0 +1,6 @@
+
+        <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="50" y="50" width="200" height="200" fill="Blue" />
+          <text x="150" y="130" dominant-baseline="middle" text-anchor="middle" font-size="30" fill="White">IBM</text>
+        </svg>
+      
