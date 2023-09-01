@@ -29,61 +29,7 @@ const prompt = [
     },
 ];
 
-function generateSvgLogo(shapeClass, shapeColor, monogram, monogramColor) {
-    const logo = new shapeClass();
-    logo.setColor(shapeColor);
-    const shapeSvg = logo.render();
-
-    // Thise code is for the position and font size of the text based on the shape
-    let textX, textY, fontSize;
-
-    switch (shapeClass.name) {
-        case 'Circle':
-            textX = 150; // Center of the SVG
-            textY = 100; // Center of the SVG
-            break;
-        case 'Square':
-            textX = 150; // Center of the SVG
-            textY = 130; // Center of the SVG
-            break;
-        case 'Triangle':
-            textX = 145; // Center of the SVG
-            textY = 140; // Center of the SVG
-            break;
-        // default:
-        //     textX = 100; // Default to center of the SVG
-        //     textY = 100; // Default to center of the SVG
-    }
-
-    fontSize = 30;
-
-    // console.log(`Debug - textX: ${textX}, textY: ${textY}, fontSize: ${fontSize}`);
-
-    const monogramSvg = `<text x="${textX}" y="${textY}" dominant-baseline="middle" text-anchor="middle" font-size="${fontSize}" fill="${monogramColor}">${monogram}</text>`;
-
-
-    return `
-    <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-      ${shapeSvg}
-      ${monogramSvg}
-    </svg>
-  `;
-}
-
 async function init() {
-    // inquirer.prompt(prompt).then((responses) => { 
-    //     const { Shape, 'Shape Color': shapeColor, Monogram, 'Monogram Color': monogramColor } = responses; 
-    //         let shape;
-    //         switch (Shape) {
-    //             case 'Circle':
-    //                 shape = Circle;
-    //                 break;
-    //             case 'Square':
-    //                 shape = Square;
-    //                 break;
-    //             case 'Triangle':
-    //                 shape = Triangle;
-    //                 break;
 
     try {
         const responses = await inquirer.prompt(prompt);
@@ -104,8 +50,10 @@ async function init() {
             }
 
         const logoSvgContent = generateSvgLogo(shapeClass, shapeColor, monogram, monogramColor);
-        fs.writeFileSync('logo.svg', logoSvgContent);
-        console.log('Generated logo.svg');
+        const timestamp = Date.now();
+        const filePath = `examples/logo_${timestamp}.svg`;
+        fs.writeFileSync(filePath, logoSvgContent);
+        console.log(`Generated logo.svg`);
 
         } catch (error) {
             console.error('An error occurred:', error);
@@ -113,6 +61,42 @@ async function init() {
         }
         
         // writeToFile('logo.svg', logoContent);
+    }
+
+    function generateSvgLogo(shapeClass, shapeColor, monogram, monogramColor) {
+        const logo = new shapeClass();
+        logo.setColor(shapeColor);
+        const shapeSvg = logo.render();
+    
+        // Thise code is for the position and font size of the text based on the shape
+        let textX, textY, fontSize;
+    
+        switch (shapeClass.name) {
+            case 'Circle':
+                textX = 150; // Center of the SVG
+                textY = 100; // Center of the SVG
+                break;
+            case 'Square':
+                textX = 150; // Center of the SVG
+                textY = 130; // Center of the SVG
+                break;
+            case 'Triangle':
+                textX = 145; // Center of the SVG
+                textY = 140; // Center of the SVG
+                break; 
+        }
+    
+        fontSize = 30;
+    
+        const monogramSvg = `<text x="${textX}" y="${textY}" dominant-baseline="middle" text-anchor="middle" font-size="${fontSize}" fill="${monogramColor}">${monogram}</text>`;
+    
+    
+        return `
+        <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+          ${shapeSvg}
+          ${monogramSvg}
+        </svg>
+      `;
     }
 
 // Function call to initialize app
