@@ -12,7 +12,7 @@ Users can run test by running npm test in the shapes.test.js integrated terminal
 ## Usage
 The following is a video that demonstrates the functionality of the SVG logo maker and all tests passing. 
 
-[![Application Video Walkthrough](https://drive.google.com/file/d/1unPqkaW29Rh7oJnp9spneNuVd-Hw5Xi3/view)](https://drive.google.com/file/d/1unPqkaW29Rh7oJnp9spneNuVd-Hw5Xi3/view)
+[![Application Video Walkthrough](https://drive.google.com/file/d/1E-X5iab2bu9XeHE5HC4oVpbbGsNj4MZY/view)](https://drive.google.com/file/d/1E-X5iab2bu9XeHE5HC4oVpbbGsNj4MZY/view)
 
 Link to repo: https://github.com/brennysouza/svglogo-gen
 
