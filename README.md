@@ -20,7 +20,7 @@ Link to repo: https://github.com/brennysouza/svglogo-gen
 Please refer to the license found in the repo. 
 
 ## Contribution
-NA
+Some help came from class peer Ashley Zemina as well as some starter code found in module 10 of course. 
 
 ## Tests
 Tests for shapes.test.js file can run through its integrated terminal by running npm test. 
